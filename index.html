@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#020817" />
+  <meta name="description" content="Mía Omnia — Una inteligencia que conecta tu vida, tu trabajo y tu entorno." />
+  <title>Mía Omnia</title>
+
+  <style>
+    :root {
+      --navy-950: #020817;
+      --navy-900: #061225;
+      --navy-800: #0a1d38;
+      --white: #f8fbff;
+      --muted: #c1cad8;
+      --gold: #c8a96a;
+      --gold-soft: #eadcb7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+      background: var(--navy-950);
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--white);
+      overflow: hidden;
+    }
+
+    .page {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 40px 24px;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 50% 39%, rgba(37, 92, 155, 0.18), transparent 29%),
+        radial-gradient(circle at 50% 45%, rgba(200, 169, 106, 0.08), transparent 43%),
+        linear-gradient(150deg, #010511 0%, var(--navy-900) 50%, #020712 100%);
+    }
+
+    .page::before,
+    .page::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .page::before {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 76px 76px;
+      mask-image: radial-gradient(circle at center, black 0%, transparent 74%);
+    }
+
+    .page::after {
+      background:
+        linear-gradient(90deg, transparent, rgba(200,169,106,0.14), transparent) top 13% left 50% / 38% 1px no-repeat,
+        linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent) bottom 13% left 50% / 58% 1px no-repeat;
+      opacity: .75;
+    }
+
+    .halo {
+      position: absolute;
+      width: min(620px, 82vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(200,169,106,.10);
+      box-shadow:
+        0 0 150px rgba(31, 84, 150, .13),
+        inset 0 0 100px rgba(255,255,255,.018);
+      z-index: -1;
+      animation: breathe 9s ease-in-out infinite;
+    }
+
+    .halo::before,
+    .halo::after {
+      content: "";
+      position: absolute;
+      border-radius: inherit;
+      inset: 13%;
+      border: 1px solid rgba(255,255,255,.055);
+    }
+
+    .halo::after {
+      inset: 31%;
+      border-color: rgba(200,169,106,.12);
+    }
+
+    .content {
+      width: min(760px, 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: reveal 1.05s ease both;
+    }
+
+    .logo {
+      width: min(460px, 84vw);
+      height: auto;
+      display: block;
+      filter:
+        drop-shadow(0 18px 42px rgba(0,0,0,.38))
+        drop-shadow(0 0 22px rgba(200,169,106,.16));
+      margin-bottom: 34px;
+      animation: logoPulse 9s ease-in-out infinite;
+    }
+
+    .subtitle {
+      max-width: 680px;
+      font-size: clamp(1.08rem, 2.4vw, 1.42rem);
+      line-height: 1.65;
+      font-weight: 350;
+      letter-spacing: .01em;
+      color: var(--muted);
+      text-wrap: balance;
+      margin-bottom: 36px;
+    }
+
+    .coming {
+      font-size: .76rem;
+      letter-spacing: .31em;
+      text-transform: uppercase;
+      color: rgba(248,251,255,.72);
+      margin-bottom: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 160px;
+      height: 50px;
+      padding: 0 28px;
+      border: 1px solid rgba(200,169,106,.62);
+      border-radius: 999px;
+      color: var(--white);
+      text-decoration: none;
+      font-size: .84rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.025);
+      backdrop-filter: blur(12px);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+      background: rgba(200,169,106,.11);
+      border-color: var(--gold-soft);
+      box-shadow: 0 12px 34px rgba(0,0,0,.28);
+      outline: none;
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(.99); opacity: .72; }
+      50% { transform: scale(1.018); opacity: 1; }
+    }
+
+    @keyframes logoPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.012); }
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 30px 20px 54px; }
+      .logo { width: min(390px, 90vw); margin-bottom: 26px; }
+      .subtitle { line-height: 1.55; margin-bottom: 31px; }
+      .halo { width: 92vw; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .content, .logo, .halo { animation: none; }
+      .button { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="halo" aria-hidden="true"></div>
+
+    <section class="content" aria-label="Mía Omnia">
+      <img
+        class="logo"
+        src="logo-mia-omnia.png"
+        alt="Mía Omnia"
+        width="900"
+        height="594"
+      />
+
+      <p class="subtitle">
+        Una inteligencia que conecta tu vida, tu trabajo y tu entorno.
+      </p>
+
+      <div class="coming">Próximamente</div>
+
+      <a class="button" href="mailto:contacto@miaomnia.com" aria-label="Contactar a Mía Omnia">
+        Contacto
+      </a>
+    </section>
+  </main>
+</body>
+</html>
